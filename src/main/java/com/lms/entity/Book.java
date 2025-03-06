@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 @Entity
@@ -18,8 +19,11 @@ public class Book {
 	private String title;
 	@NotNull(message = "author is required")
 	private String author;
+	@NotBlank(message = "publisher is required")
 	private String publisher;
+	@NotBlank(message = "Publish year is required")
 	private String publishYear;
+	@NotNull(message = "Number of book is required")
 	private int numberOfBook;
 	public Integer getBookId() {
 		return bookId;

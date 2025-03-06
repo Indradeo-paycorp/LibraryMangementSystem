@@ -3,6 +3,7 @@ package com.lms.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,8 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.lms.binding.FilterBook;
 import com.lms.binding.SortBook;
 import com.lms.entity.Book;
-import com.lms.exception.BookNotFoundException;
 import com.lms.service.BookService;
+
 
 @RestController
 @RequestMapping("/books")
@@ -24,13 +25,10 @@ public class BookController {
 	@Autowired
 	private BookService bookService;
 	
-	@GetMapping("/notFound")
-	public void book() {
-		throw new BookNotFoundException("Book not Found");
-	}
 	
 	@PostMapping("/add")
-	public String addBook(@RequestBody Book book) {
+	public String addBook(@Validated @RequestBody Book book) {
+		
 		bookService.saveBook(book);
 		return "book added successfullly";
 	}
@@ -51,7 +49,7 @@ public class BookController {
 	}
 	
 	@PostMapping("/update")
-	public String updateBook(@RequestBody Book book) {
+	public String updateBook(@Validated @RequestBody Book book) {
 		return bookService.updateBook(book);
 	}
 	
@@ -65,7 +63,7 @@ public class BookController {
 		return bookService.returnBook(id);
 	}
 	
-	@GetMapping("/	")
+	@GetMapping("/sort-based-on-criteria")
 	public List<Book> sort(@RequestBody SortBook book){
 		return bookService.sortCriteria(book);
 	}
