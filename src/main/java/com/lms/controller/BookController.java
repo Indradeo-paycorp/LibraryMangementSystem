@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.lms.binding.FilterBook;
 import com.lms.binding.SortBook;
 import com.lms.entity.Book;
+import com.lms.exception.BookNotFoundException;
 import com.lms.service.BookService;
 
 @RestController
@@ -23,9 +24,9 @@ public class BookController {
 	@Autowired
 	private BookService bookService;
 	
-	@GetMapping("/")
-	public String book() {
-		return "Book rest api";
+	@GetMapping("/notFound")
+	public void book() {
+		throw new BookNotFoundException("Book not Found");
 	}
 	
 	@PostMapping("/add")

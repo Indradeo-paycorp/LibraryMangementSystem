@@ -1,9 +1,11 @@
 package com.lms.entity;
 
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 public class Book {
@@ -11,7 +13,10 @@ public class Book {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer bookId;
+	
+	@NotNull(message = "title is required")
 	private String title;
+	@NotNull(message = "author is required")
 	private String author;
 	private String publisher;
 	private String publishYear;
